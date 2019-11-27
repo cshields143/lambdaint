@@ -23,3 +23,5 @@ const get_par_pairs = cps => {
   if (bucket.length) throw new ParError('opening', bucket, cps.join(''));
   return pairs;
 };
+
+export { get_par_pairs };
