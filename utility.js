@@ -1,27 +1,20 @@
-const ParError = class extends Error {
-  constructor(kind, locs, orig) {
-    super(kind);
-    Error.captureStackTrace(this, ParError);
-    this.locs = locs;
-    this.str = orig;
-  }
-}
-
-const get_par_pairs = cps => {
-  const bucket = [];
-  const pairs = [];
-  cps.forEach((cp, i) => {
-    if (cp === '(') bucket.push(i);
-    else if (cp === ')') {
-      if (!bucket.length) throw new ParError('closing', [i], cps.join(''));
-      else {
-        const open = bucket.pop();
-        pairs.push([open, i]);
+const ParSum = class {
+  constructor(...cps) {
+    this.pairs = [];
+    this.unopened = [];
+    const bucket = [];
+    cps.forEach((cp, i) => {
+      if (cp === '(') bucket.push(i);
+      else if (cp === ')') {
+        if (!bucket.length) this.unopened.push(i);
+        else {
+          const open_i = bucket.pop();
+          this.pairs.push([open_i, i]);
+        }
       }
-    }
-  });
-  if (bucket.length) throw new ParError('opening', bucket, cps.join(''));
-  return pairs;
+    });
+    this.unclosed = [...bucket];
+  }
 };
 
-export { get_par_pairs };
+export { ParSum };
