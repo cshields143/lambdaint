@@ -1,7 +1,8 @@
 import { ParSum } from './utility.js';
+import { IOL } from './view.js';
 
-const test_str = '(((ab((c)))))';
-const readout = new ParSum(...test_str);
-
-console.clear();
-console.log(readout.clean().join(''));
+const io = new IOL(
+  document.querySelector('input'),
+  document.querySelector('output'),
+  txt => `Did you say "${txt}"?`
+);
