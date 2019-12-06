@@ -32,6 +32,11 @@ const ParSum = class {
     })
   }
 
+  // quickly check if there are unmatched pars
+  wegood() {
+    return !this.unclosed.length && !this.unopened.length;
+  }
+
   // collapse consecutive pairs of parentheses into a
   // single "par group" --
   // so eg "(((abc)))" can become just "(abc)"
