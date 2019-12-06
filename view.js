@@ -20,7 +20,7 @@ const IOL = class {
     const txt = this.input.value;
     this.input.value = '';
     this.addoutput('>', txt);
-    this.addoutput('-', this.ep(txt));
+    this.ep(txt, txt => this.addoutput('-', txt));
   }
 };
 
